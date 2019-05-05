@@ -36,8 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Account2.findAll", query = "SELECT a FROM Account2 a"),
     @NamedQuery(name = "Account2.findById", query = "SELECT a FROM Account2 a WHERE a.id = :id"),
     @NamedQuery(name = "Account2.findByUsername", query = "SELECT a FROM Account2 a WHERE a.username = :username"),
-    @NamedQuery(name = "Account2.findByPassword", query = "SELECT a FROM Account2 a WHERE a.password = :password"),
-    @NamedQuery(name = "Account2.findByAccount2ID", query = "SELECT a FROM Account2 a WHERE a.account2ID = :account2ID")})
+    @NamedQuery(name = "Account2.findByPassword", query = "SELECT a FROM Account2 a WHERE a.password = :password")})
 public class Account2 implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,10 +50,7 @@ public class Account2 implements Serializable {
     @Size(max = 255)
     @Column(name = "Password")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Account2ID")
-    private int account2ID;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account2ID")
     private List<Customer> customerList;
 
@@ -63,11 +59,6 @@ public class Account2 implements Serializable {
 
     public Account2(Integer id) {
         this.id = id;
-    }
-
-    public Account2(Integer id, int account2ID) {
-        this.id = id;
-        this.account2ID = account2ID;
     }
 
     public Integer getId() {
@@ -92,14 +83,6 @@ public class Account2 implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getAccount2ID() {
-        return account2ID;
-    }
-
-    public void setAccount2ID(int account2ID) {
-        this.account2ID = account2ID;
     }
 
     @XmlTransient
